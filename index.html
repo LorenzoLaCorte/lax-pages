@@ -52,14 +52,15 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Keycloak, Nextcloud and Grafana Integration</h1>
+            <h1 class="title is-1 publication-title">Automatic Integration between Keycloak, Nextcloud, Grafana and other services. </h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
-                <a href="https://flowcv.me/lorenzolacorte" target="_blank">Lorenzo La Corte</a></span>
+                <a href="https://flowcv.me/lorenzolacorte" target="_blank">Lorenzo La Corte</a> with Simone Aquilini and Luca Ferrari</span>
+
                   </div>
 
                   <div class="is-size-5 publication-authors">
-                    <span class="author-block">How to integrate the services in a docker swarm, deployed with Ansible.</span>
+                    <span class="author-block">How to integrate services in a docker swarm, deployed with Ansible.</span>
                   </div>
 
                   <div class="column has-text-centered">
@@ -82,74 +83,6 @@
     </div>
   </div>
 </section>
-
-
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/xFB4vtpDdd0" title="Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      <h2 class="subtitle has-text-centered">
-        This video shows the deployed services interacting with each other.
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End teaser video -->
-
-<!-- Services abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract: the Three Services</h2>
-        <div class="content has-text-justified">
-          <p>
-            Keycloak is an open-source identity and access management solution that provides single sign-on capabilities. 
-            Making a long story short, it allows users to authenticate once and access multiple applications and services without the need to re-enter their credentials.
-            Nextcloud is a self-hosted file synchronization and sharing platform, but in this in project is used as an example of service where to enable SSO authentication.
-            Grafana is an open-source data visualization and monitoring tool to create cool charts, in this case reporting the status of our services inside the swarm.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Services abstract -->
-
-<!-- Infrastructure abstract -->
-<section class="section hero hero-body">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract: the Infrastructure</h2>
-        <div class="content has-text-justified">
-          <p>
-            Swarm + Ansible - 2+1 Machines - 17 Containers   
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Infrastructure abstract -->
-
-<!-- Services abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Take-Away Lessons I've Learned</h2>
-        <div class="content has-text-justified">
-          <p>
-            ....
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Services abstract -->
 
 <!-- Image carousel -->
 <section class="hero is-small">
@@ -216,6 +149,93 @@
 </section>
 <!-- End image carousel -->
 
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/xFB4vtpDdd0" title="Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <h2 class="subtitle has-text-centered">
+        This video shows the deployed services interacting with each other.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Services abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract: the Three Services</h2>
+        <div class="content has-text-justified">
+          <p>
+            Keycloak is an open-source identity and access management solution that provides single sign-on capabilities. 
+            Making a long story short, it allows users to authenticate once and access multiple applications and services without the need to re-enter their credentials.
+            Nextcloud is a self-hosted file synchronization and sharing platform, but in this in project is used as an example of service where to enable SSO authentication.
+            Grafana is an open-source data visualization and monitoring tool to create cool charts, in this case reporting the status of our services inside the swarm.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Services abstract -->
+
+<!-- Infrastructure abstract -->
+<section class="section hero hero-body">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract: the Infrastructure</h2>
+        <div class="content has-text-justified">
+          <p>
+            The infrastructure was based on:
+              - Using Ansible,
+              - To deploy a docker Swarm,
+              - Involving 2 Machines,
+              - Deploying 10 services in 17 Containers.
+            </p>
+            <p>
+            Deploying 10 services on a docker swarm can be tough, but writing ansible code to make them run and integrate automatically is definitely a pain in the ass.
+            Our task was basically to build all the infrastructure with one single command.
+            In order to do that ansible has to handle:
+                - files being copied and filled with secrets coming from the vault,
+                - setting up the docker swarm and its manager and worker(s),
+                - preparing and launching the docker-compose which deploy all the services.
+            And obviously the docker-compose has to configure all the services.
+            And obviously, the complexity of the project increased exponentially, rather than linearly, with each additional service that needed to be integrated. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Infrastructure abstract -->
+
+<!-- Services abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Take-Away Lessons</h2>
+        <div class="content has-text-justified">
+          <p>
+            These are the top things I will never forget because I spent soooo much time doing them:
+              - how to script entrypoints to integrate different containers, also if they are on different machines,
+              - how a container starts and live, why it usually crashes and where to find this information,
+              - how to handle secrets and how to use git in the proper way.
+            Furthermore:
+              - what you have done in a day <<< how you have done it <<< what you have learned about it.
+              - using gpt (as it is now) for this purposes (most of the times it brings you in the wrong direction),
+              - your main task should be: read the documentation, read it another time, cry, read the documentation again and then maybe understand something. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Services abstract -->
 
 <!-- Paper poster -->
 <section class="hero is-small is-light">
